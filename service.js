@@ -1,23 +1,19 @@
 
 
-const getOrderCountForUser = (name) => {
+const getOrderCountForUser = (nameToFind) => {
 
-  var orderCount = 0;
+  const userList = require('./resources/users.json');
 
-  const users = require('./resources/users.json');
-  for (user of users) {
-    if (user.name === name) {
-      const userId = user.userId;
-      const orders = require('./resources/orders.json');
-      for (order of orders) {
-        if (order.userId === userId) {
-          orderCount ++;
-        }
-      }
-      return orderCount;
-    } ;
-  };
-  return 0;
+  const foundUser = userList.find(user => user.name === nameToFind);
+
+  if (!foundUser) return 0;
+
+  const orderList = require('./resources/orders.json');
+
+  const numberOfUserOrders = orderList.filter(order => order.userId === foundUser.userId).length;
+
+  return numberOfUserOrders;
+
 }
   
 const getOrderCountForProduct = function(productNameToFind) {
