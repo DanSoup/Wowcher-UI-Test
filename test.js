@@ -16,8 +16,17 @@ describe('service.js', function() {
   });
   
   describe('getOrderCountForProduct', () => {
+    it('should return 1 orders for toothbrush', () => {
+      assert.equal(subject.getOrderCountForProduct('toothbrush'), 1, 'number of toothbrush orders incorrect');
+    });
     it('should return 2 orders for hammer', () => {
       assert.equal(subject.getOrderCountForProduct('hammer'), 2, 'number of hammer orders incorrect');
+    });
+    it('should return 1 orders for spoon', () => {
+      assert.equal(subject.getOrderCountForProduct('spoon'), 1, 'number of spoon orders incorrect');
+    });
+    it('should return 3 orders for chair', () => {
+      assert.equal(subject.getOrderCountForProduct('chair'), 3, 'number of chair orders incorrect');
     });
   });
 
