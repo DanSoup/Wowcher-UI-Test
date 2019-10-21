@@ -1,30 +1,30 @@
 var assert = require('assert');
-var subject = require('./service')
+var subject = require('./service');
 
-describe('service', function() {
+describe('service.js', function() {
 
-  describe('calculate orders', () => {
+  describe('getOrderCountForUser', () => {
     it('should return 3 orders for sam', () => {
-      assert.equal(subject.getOrderCountForUser('sam'), 3, 'number of users incorrect')
-    })
-  })
+      assert.equal(subject.getOrderCountForUser('sam'), 3, 'number of users incorrect');
+    });
+  });
   
-  describe('calculate number of products', () => {
+  describe('getOrderCountForProduct', () => {
     it('should return 2 orders for hammer', () => {
-      assert.equal(subject.getOrderCountForProduct('hammer'), 2, 'number of hammer orders incorrect')
-    })
-  })
+      assert.equal(subject.getOrderCountForProduct('hammer'), 2, 'number of hammer orders incorrect');
+    });
+  });
 
-  describe('return names of customers that bought item', () => {
+  describe('getCustomerNamesForProduct', () => {
     it('should return bob & sue for chair', () => {
-      assert.deepEqual(subject.getCustomerNamesForProduct('chair'), ['bob', 'sue'], 'customer name didnt match')
-    })
-  })  
+      assert.deepEqual(subject.getCustomerNamesForProduct('chair'), ['bob', 'sue'], 'customer name didnt match');
+    });
+  });
 
-  describe('return name of the most popular procduct', () => {
+  describe('getMostPopularProduct', () => {
     it('should return chair', () => {
-      assert.deepEqual(subject.getMostPopularProduct(), ['chair'], 'most popular product incorrect')
-    })
-  })  
+      assert.deepEqual(subject.getMostPopularProduct(), ['chair'], 'most popular product incorrect');
+    });
+  });
 
 });
