@@ -57,7 +57,32 @@ function getCustomerNamesForProduct(productNameToFind) {
 } 
   
 const getMostPopularProduct = () => {
-  return ['chair']
+
+  const orderList = require('./resources/orders.json');
+
+  const orderCounts = orderList.reduce((acc, order) => {
+    const {productId} = order;
+    if (acc[productId]) acc[productId]++;
+    else acc[productId] = 1;
+    return acc;
+  }, {});
+
+  const sortedOrderCounts = Object.entries(orderCounts).sort((a, b) => b[1] - a[1])
+
+  const maxOrders = sortedOrderCounts[0][1];
+
+  const productList = require('./resources/products.json');
+
+  const mostOrderedProducts = sortedOrderCounts.reduce((acc, product) => {
+    const [productId, orderAmount] = product;
+    if (orderAmount === maxOrders) {
+      const {productName} = productList.find(product => product.productId == productId);
+      return [...acc, productName];
+    }
+    else return acc;
+  }, []);
+
+  return mostOrderedProducts;
 }
   
 module.exports = {
