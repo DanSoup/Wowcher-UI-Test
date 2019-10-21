@@ -1,7 +1,9 @@
 
-var orderCount = 0;
 
 const getOrderCountForUser = (name) => {
+
+  var orderCount = 0;
+  
   const users = require('./resources/users.json');
   for (user of users) {
     if (user.name === name) {
