@@ -28,6 +28,9 @@ describe('service.js', function() {
     it('should return 3 orders for chair', () => {
       assert.equal(subject.getOrderCountForProduct('chair'), 3, 'number of chair orders incorrect');
     });
+    it('should return 0 orders for donkey', () => {
+      assert.equal(subject.getOrderCountForProduct('donkey'), 0, 'number of donkey orders incorrect');
+    });
   });
 
   describe('getCustomerNamesForProduct', () => {
