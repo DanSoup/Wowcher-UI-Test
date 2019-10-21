@@ -14,9 +14,10 @@ const getOrderCountForUser = (nameToFind) => {
 
   return numberOfUserOrders;
 
-}
+};
   
-const getOrderCountForProduct = function(productNameToFind) {
+const getOrderCountForProduct = (productNameToFind) => {
+
   const productList = require('./resources/products.json');
   const productToFind = productList.find(product => product.productName === productNameToFind);
   
@@ -27,9 +28,9 @@ const getOrderCountForProduct = function(productNameToFind) {
 
   return productOrderCount;
 
-} 
+};
   
-function getCustomerNamesForProduct(productNameToFind) {
+const getCustomerNamesForProduct = (productNameToFind) => {
 
   const productList = require('./resources/products.json');
   const productToFind = productList.find(product => product.productName === productNameToFind);
@@ -50,7 +51,8 @@ function getCustomerNamesForProduct(productNameToFind) {
   });
 
   return Object.keys(foundCustomers).sort();
-} 
+
+} ;
   
 const getMostPopularProduct = () => {
 
@@ -79,11 +81,12 @@ const getMostPopularProduct = () => {
   }, []);
 
   return mostOrderedProducts;
-}
+
+};
   
 module.exports = {
   getOrderCountForUser,
   getOrderCountForProduct,
   getCustomerNamesForProduct,
   getMostPopularProduct
-}
+};
