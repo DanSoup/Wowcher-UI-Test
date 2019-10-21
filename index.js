@@ -2,13 +2,11 @@ const express = require('express')
 const app = express()
 const service = require('./service')
 
-var userCount = 0;
-
 app.get('/', (req, res) => {res.send('Status: OK')})
 
 app.get('/users', (req, res) => {
   const results = require('./resources/users.json')
-  userCount += results.length
+  const userCount = results.length
   const payload = {results, 'userCount': userCount}
   res.send(payload)
 })
