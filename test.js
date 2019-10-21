@@ -37,8 +37,20 @@ describe('service.js', function() {
   });
 
   describe('getCustomerNamesForProduct', () => {
+    it('should return sam for toothbrush', () => {
+      assert.deepEqual(subject.getCustomerNamesForProduct('toothbrush'), ['sam'], 'customer name didnt match');
+    });
+    it('should return bob & sam for hammer', () => {
+      assert.deepEqual(subject.getCustomerNamesForProduct('hammer'), ['bob', 'sam'], 'customer name didnt match');
+    });
+    it('should return sam for spoon', () => {
+      assert.deepEqual(subject.getCustomerNamesForProduct('spoon'), ['sam'], 'customer name didnt match');
+    });
     it('should return bob & sue for chair', () => {
       assert.deepEqual(subject.getCustomerNamesForProduct('chair'), ['bob', 'sue'], 'customer name didnt match');
+    });
+    it('should return no names for monkey', () => {
+      assert.deepEqual(subject.getCustomerNamesForProduct('monkey'), [], 'customer name didnt match');
     });
   });
 
