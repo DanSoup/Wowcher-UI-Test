@@ -22,10 +22,11 @@ const getOrderCountForUser = (name) => {
   
 const getOrderCountForProduct = function(productNameToFind) {
   const productList = require('./resources/products.json');
-  const orderList = require('./resources/orders.json');
-  
   const productToFind = productList.find(product => product.productName === productNameToFind);
   
+  if (!productToFind) return 0; 
+  
+  const orderList = require('./resources/orders.json');
   const productOrderCount = orderList.filter(order => order.productId === productToFind.productId).length;
 
   return productOrderCount;
