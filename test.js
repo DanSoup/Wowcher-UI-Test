@@ -11,7 +11,7 @@ describe('service.js', function() {
       assert.equal(subject.getOrderCountForUser('bob'), 3, 'number of users incorrect');
     });
     it('should return 1 orders for sue', () => {
-      assert.equal(subject.getOrderCountForUser('sue'), 3, 'number of users incorrect');
+      assert.equal(subject.getOrderCountForUser('sue'), 1, 'number of users incorrect');
     });
   });
   
