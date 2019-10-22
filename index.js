@@ -35,4 +35,9 @@ app.get('/users/product/:product', (req, res) => {
   res.send(customers);
 })
 
+app.get('/products/popular', (req, res) => {
+  const mostPopularProducts = service.getMostPopularProduct();
+  res.send({mostPopularProducts});
+})
+
 app.listen(3007, () => console.log('Listening on port 3007'))
