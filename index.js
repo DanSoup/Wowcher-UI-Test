@@ -30,9 +30,8 @@ app.get('/orders/product/:product', (req, res) => {
 
 app.get('/users/product/:product', (req, res) => {
   const productName = req.params.product
-  // const customers = service.getCustomerNamesForProduct({'customerOrdered': productName});
   const customers = service.getCustomerNamesForProduct(productName);
-  res.send(customers);
+  res.send({customers});
 })
 
 app.get('/products/popular', (req, res) => {
