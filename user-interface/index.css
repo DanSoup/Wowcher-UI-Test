@@ -18,3 +18,29 @@ th {
 table {
   border-collapse: collapse;
 }
+
+.hidden {
+  display: none;
+}
+
+@keyframes obnoxious {
+  0% {
+    color: #ff0000;
+    transform: rotateZ(10deg);
+  }  
+  25% {transform: rotateZ(-10deg);}
+  33% {color: #0000ff;}
+  50% {transform: rotateZ(10deg);}
+  66% {color: #00aa00;}
+  75% {transform: rotateZ(-10deg);}
+  100% {
+    color: #ff0000;
+    transform: rotateZ(10deg);
+  }
+}
+
+#popular {
+  animation: obnoxious infinite 2s;
+  width: auto;
+  transform-origin: 120px;
+}
