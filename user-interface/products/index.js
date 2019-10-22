@@ -2,95 +2,55 @@ const API_URL = 'http://127.0.0.1:3007';
 
 const body = document.getElementsByTagName('body')[0];
 const table = document.getElementsByTagName('tbody')[0];
-const tableHeader = document.getElementsByTagName('thead')[0].firstElementChild;
+const productNameInput = document.getElementsByTagName('input')[0];
+const getProductInformationButton = document.getElementsByTagName('button')[0];
+const propductInformationSection = document.getElementsByTagName('section')[0];
 
 const activityLog = document.getElementById('activity-log');
 
-const getOrderCountsButton = document.getElementById('order-counts-button');
+let productName = productNameInput.value;
 
-const users = [];
-
-const handleGetOrderCounts = () => {
-
-  getOrderCountsButton.onclick = () => {};
-
-  activityLog.innerText = 'Fetching order counts...'
-  
-  const orderCountHeader = document.createElement('th');
-  orderCountHeader.innerText = 'Order Count';
-  tableHeader.appendChild(orderCountHeader);
-
-  const orderCountPromises = users.map(user => {
-    
-    return fetch(`${API_URL}/orders/user/${user.name}`)
-    .then(res => {
-      return res.json();
-    })
-    .then(res => {
-      const userRow = document.getElementById('user-' + user.userId);
-      const newCell = document.createElement('td')
-      newCell.innerText = res.ordersByCustomer;
-      userRow.appendChild(newCell);
-    })
-    .catch(err => {
-      console.log(err)
-    })
-
-  });
-
-  Promise.all(orderCountPromises)
-  .then(() => {
-    activityLog.innerText = 'Order counts fetched';
-    getOrderCountsButton.innerText = 'Order counts fetched';
-  })
-  .catch(err => {
-    activityLog.innerText = 'Error fetching order counts.';
-    console.log(err);
-  })
-
+productNameInput.oninput = e => {
+  productName = e.target.value;
+  productNameInput.value = productName;
 }
 
-const fetchUserList = () => {
+const getProductInformation = async () => {
 
-  activityLog.innerText = 'Fetching user list...';
+  getProductInformationButton.innerText = 'Fetching Product Information...'
 
-  fetch(`${API_URL}/users`)
+  document.getElementById('popular').className = 'hidden';
+  propductInformationSection.className = '';
+
+  document.getElementById('product-name').innerText = productName
+
+  const numberOfOrders = await fetch(`${API_URL}/orders/product/${productName}`)
+  .then(res => res.json())
   .then(res => {
-    return res.json();
+    return res.numberOfOrders;
   })
+
+  const orderedBy = await fetch(`${API_URL}/users/product/${productName}`)
+  .then(res => res.json())
   .then(res => {
-
-    users.push(...res.results);
-
-    res.results.forEach(user => {
-
-      const newRow = document.createElement('tr');
-
-      const {userId} = user;
-
-      newRow.id = 'user-' + userId;
-
-      ['userId', 'name', 'age', 'email'].forEach(field => {
-        const idCell = document.createElement('td');
-        idCell.innerText = user[field];
-        newRow.appendChild(idCell);
-      })
-
-      table.appendChild(newRow);
-
-    });
-
-    activityLog.innerText = 'User list fetched.';
-
-  })
-  .catch(err => {
-    activityLog.innerText = 'Error fetching user list.';
-    console.log('ERROR');
-    console.log(err);
+    return res.customers
   })
 
-}
+  const mostPopularProducts = await fetch(`${API_URL}/products/popular`)
+  .then(res => res.json())
+  .then(res => {
+    return res.mostPopularProducts;
+  })
 
-fetchUserList();
+  if (mostPopularProducts.includes(productName)) {
+    document.getElementById('popular').className = '';
+  }
 
-getOrderCountsButton.onclick = handleGetOrderCounts;
+  document.getElementById('order-amount').innerText = `Order amount: ${numberOfOrders}`
+  document.getElementById('ordered-by').innerText = `Ordered by: ${orderedBy.join(', ')}`
+
+  getProductInformationButton.innerText = 'Get Product Information';
+
+};
+
+getProductInformationButton.onclick = getProductInformation;
