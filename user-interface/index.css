@@ -1,3 +1,20 @@
 * {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+button {
+  margin: 20px 0px;
+}
+
+td, th {
+  border: solid 1px black;
+  padding: 4px;
+}
+
+th {
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+}
