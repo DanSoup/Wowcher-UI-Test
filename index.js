@@ -2,6 +2,11 @@ const express = require('express')
 const app = express()
 const service = require('./service')
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.get('/', (req, res) => {res.send('Status: OK')})
 
 app.get('/users', (req, res) => {
